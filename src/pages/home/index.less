@@ -1,0 +1,71 @@
+@import url(../../styles/theme.less);
+.home-wrap {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  .content {
+    position: relative;
+
+    user-select: none;
+    height: calc(100% - 45px - 20px);
+  }
+}
+
+.head-wrap {
+  display: flex;
+  align-items: center;
+  > div:first-child {
+    flex: 1;
+  }
+  > div:last-child {
+    padding: 0 16px;
+  }
+}
+
+.menu-wrap {
+  margin-top: 28px;
+  p {
+    color: @color-title;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  .menu-item {
+    color: @color-title;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .icon {
+    width: 40px;
+    height: 40px;
+    display: block;
+  }
+  .my-grid {
+    --gap-vertical: 30px;
+  }
+}
+
+.login-out-btn {
+  width: 220px;
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  margin-left: -110px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 16px;
+  color: #404040;
+  padding: 16px;
+}
+
+.my-checkbox {
+  --font-size: 12px;
+  --icon-size: 16px;
+}
+.checkbox-text {
+  color: #1890ff;
+}
