@@ -5,13 +5,6 @@
  * @LastEditTime: 2025-01-15 18:12:22
  * @FilePath: \park-h5\src\pages\park-detail\index.jsx
  */
-/*
- * @Author: Jonny
- * @Date: 2024-08-28 13:22:05
- * @LastEditors: Jonny
- * @LastEditTime: 2024-08-30 09:13:36
- * @FilePath: \alarm-h5\src\pages\home\index.jsx
- */
 
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -145,6 +138,14 @@ function Home() {
                 </Card>
               </Grid.Item>
             </Grid>
+
+            <div class="details">
+              <h2>商品详情</h2>
+              <p>新鲜羽衣甘蓝，含有丰富膳食纤维等营养元素，加入苹果与橙子的清甜、融合雪梨、香水柠檬、黄柠檬多种新鲜水果的清新，金奖茉莉初雪回甘让味觉更丰富充盈。100%甜味来自水果，每日500瓶果瓶，瘦度更轻盈。</p>
+              <p>*产品甜味来自水果糖分，糖尿病患者及控糖需求人士慎重饮用。</p>
+              <p>*瘦度、轻盈指数为形瓶型更瘦更轻便，不消化功效性。</p>
+              <p>*杯型：中杯500mL，指杯型容量，内盛饮品量请以门店出品为准。</p>
+            </div>
           </div>
         </div>
       </PullToRefresh>

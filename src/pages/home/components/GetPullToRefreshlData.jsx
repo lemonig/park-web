@@ -23,7 +23,7 @@ import {
 } from "antd-mobile";
 import { sleep } from "antd-mobile/es/utils/sleep";
 import { List as DList } from "@Components";
-import { list as queryListApi } from "@Api/market";
+import { listMarket as queryListApi } from "@Api/market";
 import {
   useNavigate,
   useParams,
@@ -108,7 +108,7 @@ function GetPullToRefreshlData(props, ref) {
       setLoading(false);
       setData((val) => [...val, ...append]);
       setPage((pageIndex) => pageIndex + 1);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const getNextData = async (params) => {
@@ -123,6 +123,7 @@ function GetPullToRefreshlData(props, ref) {
       }
     } catch (error) {
       console.log(error);
+      return [];
     }
   };
   const goDetail = (id) => {

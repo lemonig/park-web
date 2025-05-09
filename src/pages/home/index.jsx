@@ -48,6 +48,8 @@ import {
 import { IconFont } from "@Components";
 import "./index.less";
 
+import sale_btn from "@Assets/img/sale_btn.svg";
+
 function Home() {
   let navigate = useNavigate();
   const dispatch = useDispatch();
@@ -113,64 +115,32 @@ function Home() {
       },
     });
   };
+  const gotoSale = () => {
+    navigate("/rentForm");
+
+  };
+
+
+
   return (
     <div className="home-wrap">
-      <NavBar back="" backIcon={<IconFont iconName="tuichu" />} onBack={back}>
+      {/* <NavBar back="" backIcon={<IconFont iconName="tuichu" />} onBack={back}>
         首页
-      </NavBar>
-      {/* <div className="head-wrap">
-        <Dropdown>
-          <Dropdown.Item key="sorter" title="类型">
-            <div style={{ padding: 12, maxHeight: "270px", overflow: "auto" }}>
-              <CheckList value={formmemo.type} onChange={sortChange1}>
-                {typeList.map((item) => (
-                  <CheckList.Item key={"type" + item.value} value={item.value}>
-                    {item.label}
-                  </CheckList.Item>
-                ))}
-              </CheckList>
-            </div>
-          </Dropdown.Item>
-          <Dropdown.Item key="timeType" title="处理状态 ">
-            <div style={{ padding: 12 }}>
-              <CheckList value={formmemo.alarmStatus} onChange={sortChange2}>
-                {statusList.map((item) => (
-                  <CheckList.Item
-                    key={"status" + item.value}
-                    value={item.value}
-                  >
-                    {item.label}
-                  </CheckList.Item>
-                ))}
-              </CheckList>
-            </div>
-          </Dropdown.Item>
-          <Dropdown.Item key="time" title="严重程度">
-            <div style={{ padding: 12 }}>
-              <CheckList value={formmemo.alarmLevel} onChange={sortChange3}>
-                {levelList.map((item) => (
-                  <CheckList.Item key={"level" + item.value} value={item.value}>
-                    {item.label}
-                  </CheckList.Item>
-                ))}
-              </CheckList>
-            </div>
-          </Dropdown.Item>
-        </Dropdown>
-        <div>
-          {mode == "list" ? (
-            <AppstoreOutline
-              style={{ fontSize: "20px" }}
-              onClick={() => dispatch(SET_MODE("card"))}
-            ></AppstoreOutline>
-          ) : (
-            <UnorderedListOutline
-              onClick={() => dispatch(SET_MODE("list"))}
-              style={{ fontSize: "20px" }}
-            ></UnorderedListOutline>
-          )}
+      </NavBar> */}
+      <div className="top-main">
+
+        <div className="top-main-item">
+          <img src={sale_btn} alt="" onClick={gotoSale} />
         </div>
-      </div> */}
+
+        <div className="top-main-item">
+          <img src={sale_btn} alt="" />
+        </div>
+
+      </div>
+
+
+
       <div>
         <div className="ontent">
           <GetPullToRefreshlData ref={childRef} />

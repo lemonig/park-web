@@ -1,7 +1,7 @@
 
 import { _post, _download } from "@/server/http";
 // 市场列表 
-export function list(data) {
+export function listMarket(data) {
   return _post({
     url: `/api/market/list`,
     method: 'post',
@@ -9,7 +9,7 @@ export function list(data) {
   })
 }
 // 删除 
-export function deleted(data) {
+export function deletedMarket(data) {
   return _post({
     url: `/api/market/delete`,
     method: 'post',
@@ -17,7 +17,7 @@ export function deleted(data) {
   })
 }
 // 添加 
-export function add(data) {
+export function addMarket(data) {
   return _post({
     url: `/api/market/add`,
     method: 'post',
@@ -25,7 +25,7 @@ export function add(data) {
   })
 }
 // 更新 
-export function update(data) {
+export function updateMarket(data) {
   return _post({
     url: `/api/market/update`,
     method: 'post',

@@ -105,7 +105,7 @@ function Login() {
 
   return (
     <div className="login-contain">
-      <header className="title">水环境数据预警</header>
+      <header className="title">爱上租</header>
 
       <animated.div style={fadeTransition}>
         {isSmsType && (

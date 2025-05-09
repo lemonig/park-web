@@ -3,12 +3,12 @@ import "./index.less";
 
 function Index({ title, value, prefix }, ...props) {
   return (
-    <div className="statistic">
-      <div className="title">{title}</div>
-      <div className="content">
-        <span className="content-prefix">{prefix}</span>
-        <span className="content-value">
-          <span className="content-value-init">{value}</span>
+    <div className="lm-statistic">
+      <div className="lm-statistic-title">{title}</div>
+      <div className="lm-statistic-content">
+        <span className="lm-statistic-content-prefix">{prefix}</span>
+        <span className="lm-statistic-content-value">
+          <span className="lm-statistic-content-value-init">{value}</span>
         </span>
       </div>
     </div>
