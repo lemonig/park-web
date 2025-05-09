@@ -51,12 +51,14 @@ function RentForm() {
   const onSubmit = async () => {
     await form.validateFields();
     const values = form.getFieldsValue();
-    values.cityCode = values.cityCode[0];
     if (Array.isArray(values.photo)) {
       values.photo = values?.photo.map((item) => {
         return item.url;
       });
     }
+    //TOTO 去掉写死的参数
+    values.owner_id = 1
+    values["type"] = 1
     setLoading(true);
     let { success } = await addMarket(values);
     if (success) {
@@ -85,7 +87,7 @@ function RentForm() {
   return (
     <>
       <NavBar back="返回" onBack={back}>
-        投诉建议
+        我要出租
       </NavBar>
       <Form
         layout="horizontal"
@@ -103,19 +105,6 @@ function RentForm() {
           </Button>
         }
       >
-        <Form.Item
-          label="联系人"
-          name="linkman_id"
-          rules={[{ required: true }]}
-          onClick={() => {
-            setContactPopupVis(true);
-          }}
-        >
-          <p>
-            {concated.name} {concated.mobile}
-          </p>
-          <p>{concated.address}</p>
-        </Form.Item>
 
         {/* <Form.Item
           label="选择省份"
@@ -136,6 +125,25 @@ function RentForm() {
             }
           </Picker>
         </Form.Item> */}
+
+
+        <Form.Item
+          label="车位号"
+          layout="vertical"
+          name="number"
+          rules={[{ required: true }]}
+        >
+          <Input placeholder="请输入" />
+        </Form.Item>
+
+        <Form.Item
+          label="价格"
+          layout="vertical"
+          name="price"
+          rules={[{ required: true }]}
+        >
+          <Input placeholder="请输入" />
+        </Form.Item>
 
         <Form.Item
           label="描述"
