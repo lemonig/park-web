@@ -49,6 +49,7 @@ import { IconFont } from "@Components";
 import "./index.less";
 
 import sale_btn from "@Assets/img/sale_btn.svg";
+import rent_btn from "@Assets/img/rent_btn.svg";
 
 function Home() {
   let navigate = useNavigate();
@@ -116,6 +117,10 @@ function Home() {
     });
   };
   const gotoSale = () => {
+    navigate("/saleForm");
+
+  };
+  const gotoRent = () => {
     navigate("/rentForm");
 
   };
@@ -130,11 +135,11 @@ function Home() {
       <div className="top-main">
 
         <div className="top-main-item">
-          <img src={sale_btn} alt="" onClick={gotoSale} />
+          <img src={sale_btn} alt="" onClick={gotoSale} width={100} />
         </div>
 
         <div className="top-main-item">
-          <img src={sale_btn} alt="" />
+          <img src={rent_btn} alt="" onClick={gotoRent} width={100} />
         </div>
 
       </div>

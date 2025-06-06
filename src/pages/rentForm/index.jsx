@@ -27,22 +27,16 @@ import {
 } from "../../utils/imgUpload";
 import { addMarket } from "@Api/market";
 
-
-
 function RentForm() {
   let navigate = useNavigate();
   const [form] = Form.useForm();
-  const [fileList, setFileList] = useState([
-    {
-      url: demoSrc,
-    },
-  ]);
+  const [fileList, setFileList] = useState([]);
 
   const [contactPopupVis, setContactPopupVis] = useState(false);
   const [concated, setConcated] = useState({}); //已选择的联系人
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => { }, []);
+  useEffect(() => {}, []);
 
   const back = () => {
     navigate(-1, { replace: true });
@@ -57,8 +51,8 @@ function RentForm() {
       });
     }
     //TOTO 去掉写死的参数
-    values.owner_id = 1
-    values["type"] = 1
+    values.owner_id = 1;
+    values["type"] = 1;
     setLoading(true);
     let { success } = await addMarket(values);
     if (success) {
@@ -84,6 +78,12 @@ function RentForm() {
       linkman_id: val.id,
     });
   };
+
+  const fileChange = (item) => {
+    console.log(item);
+    console.log(fileList);
+    setFileList(fileList);
+  };
   return (
     <>
       <NavBar back="返回" onBack={back}>
@@ -105,7 +105,6 @@ function RentForm() {
           </Button>
         }
       >
-
         {/* <Form.Item
           label="选择省份"
           name="cityCode"
@@ -125,7 +124,6 @@ function RentForm() {
             }
           </Picker>
         </Form.Item> */}
-
 
         <Form.Item
           label="车位号"
@@ -157,7 +155,7 @@ function RentForm() {
         <Form.Item label="照片" layout="vertical" name="photo">
           <ImageUploader
             value={fileList}
-            onChange={setFileList}
+            onChange={fileChange}
             upload={mockUpload}
             showFailed={false}
             maxCount={3}
