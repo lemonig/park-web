@@ -45,12 +45,13 @@ function RentForm() {
   const onSubmit = async () => {
     await form.validateFields();
     const values = form.getFieldsValue();
-    if (Array.isArray(values.photo)) {
-      values.photo = values?.photo.map((item) => {
-        return item.url;
-      });
-    }
-    //TOTO 去掉写死的参数
+    console.log(values.photo);
+    // if (Array.isArray(values.photo)) {
+    //   values.photo = values?.photo.map((item) => {
+    //     return item.url;
+    //   });
+    // }
+    //TOdO 去掉写死的参数
     values.owner_id = 1;
     values["type"] = 1;
     setLoading(true);
@@ -143,12 +144,7 @@ function RentForm() {
           <Input placeholder="请输入" />
         </Form.Item>
 
-        <Form.Item
-          label="描述"
-          layout="vertical"
-          name="describe"
-          rules={[{ required: true }]}
-        >
+        <Form.Item label="描述" layout="vertical" name="describe">
           <TextArea placeholder="请输入内容" rows={3} />
         </Form.Item>
 
