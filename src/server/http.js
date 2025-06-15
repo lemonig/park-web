@@ -42,6 +42,8 @@ axios.interceptors.response.use(
   },
 
   (error) => {
+    console.log(error);
+    
     if (error.response?.status) {
       handStatus(error.response?.status)
       return Promise.reject(error.response);

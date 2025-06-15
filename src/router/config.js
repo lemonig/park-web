@@ -16,6 +16,7 @@ const ParkDetail = React.lazy(() => import("@Pages/park-detail"));
 const Staff = React.lazy(() => import("@Pages/staff"));
 const OverForm = React.lazy(() => import("@Pages/overForm"));
 const RentForm = React.lazy(() => import("@Pages/rentForm"));
+const SaleForm = React.lazy(() => import("@Pages/saleForm"));
 // 状态
 const Nopage = React.lazy(() => import("@Pages/404"));
 const NetErr = React.lazy(() => import("@Pages/504"));
@@ -86,6 +87,15 @@ const config = [
         element: (
           <React.Suspense fallback={<>...</>}>
             <RentForm />,
+          </React.Suspense>
+        ),
+      },
+
+      {
+        path: "saleForm",
+        element: (
+          <React.Suspense fallback={<>...</>}>
+            <SaleForm />,
           </React.Suspense>
         ),
       },

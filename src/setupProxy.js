@@ -13,7 +13,7 @@ module.exports = function (app) {
     "/api",
     createProxyMiddleware({
       // target: "http://43.136.76.214:8080/api", // 只需设置目标服务器的基础地址
-      target: "http://192.168.188.110:8080/api", // 只需设置目标服务器的基础地址
+      target: "http://192.168.31.228:8080/api", // 只需设置目标服务器的基础地址
       changeOrigin: true,
       // logger: console,
       // on: {

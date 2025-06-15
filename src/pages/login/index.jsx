@@ -45,9 +45,11 @@ function Login() {
       } else {
         Toast.show(data);
       }
-    } catch (error) {}
+    } catch (error) {}finally{
+      setLoading(false);
 
-    setLoading(false);
+    }
+
   };
 
   const onSubmit1 = async () => {
@@ -105,7 +107,7 @@ function Login() {
 
   return (
     <div className="login-contain">
-      <header className="title">爱上租</header>
+      <header className="title">车位租售</header>
 
       <animated.div style={fadeTransition}>
         {isSmsType && (
@@ -164,10 +166,10 @@ function Login() {
               </Button>
             }
           >
-            <Form.Item name="account">
+            <Form.Item name="account" rules={[{ required: true }]}>
               <Input placeholder="请输入用户名" type="string" />
             </Form.Item>
-            <Form.Item name="password">
+            <Form.Item name="password" rules={[{ required: true }]}>
               <Input placeholder="请输入密码" type="password" />
             </Form.Item>
           </Form>
