@@ -167,7 +167,7 @@ function GetPullToRefreshlData(props, ref) {
               key={item.code + "l" + index}
               prefix={
                 <Image
-                  src={parkSvg}
+                  src={item.images[0]?.url ??  parkSvg}
                   style={{ borderRadius: 20 }}
                   fit="cover"
                   width={80}
