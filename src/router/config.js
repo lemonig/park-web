@@ -13,6 +13,8 @@ const Login = React.lazy(() => import("@Pages/login"));
 const BodyLayout = React.lazy(() => import("../containers/layout-body"));
 const Home = React.lazy(() => import("@Pages/home"));
 const ParkDetail = React.lazy(() => import("@Pages/park-detail"));
+const MarketDetail = React.lazy(() => import("@Pages/market-detail"));
+
 const Staff = React.lazy(() => import("@Pages/staff"));
 const OverForm = React.lazy(() => import("@Pages/overForm"));
 const RentForm = React.lazy(() => import("@Pages/rentForm"));
@@ -71,6 +73,14 @@ const config = [
         element: (
           <React.Suspense fallback={<>...</>}>
             <ParkDetail />,
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "market/:id",
+        element: (
+          <React.Suspense fallback={<>...</>}>
+            <MarketDetail />,
           </React.Suspense>
         ),
       },
