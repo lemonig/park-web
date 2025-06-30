@@ -32,3 +32,11 @@ export function updateMarket(data) {
     data
   })
 }
+// 详情 
+export function detailMarket(data) {
+  return _post({
+    url: `/api/market/detail`,
+    method: 'post',
+    data
+  })
+}

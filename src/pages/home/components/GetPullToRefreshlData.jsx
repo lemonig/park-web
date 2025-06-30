@@ -130,7 +130,7 @@ function GetPullToRefreshlData(props, ref) {
     const scrollPosition = containerRef.current.scrollTop; // 获取当前滚动位置
 
     navigate({
-      pathname: `/park/${id}`,
+      pathname: `/market/${id}`,
     });
   };
   const style = {
