@@ -41,4 +41,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: your-docker-username/your-app-name:latest
+          tags: sixnut/park-web:latest
