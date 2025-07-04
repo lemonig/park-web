@@ -14,18 +14,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. 设置 Node.js 环境
+      # 2. 设置 Node.js 环境，并启用 yarn 缓存
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: yarn
 
       # 3. 安装依赖并构建 dist
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Build frontend
-        run: npm run build
+        run: yarn build
 
       # 4. 登录 Docker Hub
       - name: Log in to Docker Hub

@@ -2,8 +2,8 @@
  * @Author: Jonny
  * @Date: 2024-08-28 13:22:05
  * @LastEditors: Jonny
- * @LastEditTime: 2024-09-03 10:10:29
- * @FilePath: \alarm-h5\src\store\index.js
+ * @LastEditTime: 2025-07-04 15:37:35
+ * @FilePath: \park-h5\src\store\index.js
  */
 import { configureStore } from "@reduxjs/toolkit";
 
@@ -29,5 +29,5 @@ export const store = configureStore({
   //   getDefaultMiddleware().concat(middleware),
   // // enhancers: (getDefaultEnhancers) =>
   // //   getDefaultEnhancers().concat(monitorReducersEnhancer),
-  // devTools: process.env.NODE_ENV !== 'production',
+  devTools: process.env.NODE_ENV !== 'production',
 });
