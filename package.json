@@ -59,7 +59,6 @@
     "less": "^4.2.0",
     "less-loader": "^12.2.0",
     "moment-locales-webpack-plugin": "^1.2.0",
-    "redux-devtools": "^3.7.0",
     "redux-devtools-extension": "^2.13.9",
     "terser-webpack-plugin": "^5.3.10",
     "uglifyjs-webpack-plugin": "^2.2.0",
