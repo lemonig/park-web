@@ -25,8 +25,8 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-- name: Build frontend (skip ESLint)
-  run: DISABLE_ESLINT_PLUGIN=true yarn build
+      - name: Build frontend (skip ESLint)
+        run: DISABLE_ESLINT_PLUGIN=true yarn build
 
       # 4. 登录 Docker Hub
       - name: Log in to Docker Hub
