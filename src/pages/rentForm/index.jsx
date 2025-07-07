@@ -148,7 +148,7 @@ function RentForm() {
           <TextArea placeholder="请输入内容" rows={3} />
         </Form.Item>
 
-        <Form.Item label="照片" layout="vertical" name="photo">
+        <Form.Item label="照片" layout="vertical" name="images">
           <ImageUploader
             value={fileList}
             onChange={fileChange}

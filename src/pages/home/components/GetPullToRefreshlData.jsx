@@ -108,7 +108,7 @@ function GetPullToRefreshlData(props, ref) {
       setLoading(false);
       setData((val) => [...val, ...append]);
       setPage((pageIndex) => pageIndex + 1);
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const getNextData = async (params) => {
@@ -167,8 +167,8 @@ function GetPullToRefreshlData(props, ref) {
               key={item.code + "l" + index}
               prefix={
                 <Image
-                  src={item.images[0]?.url ??  parkSvg}
-                  style={{ borderRadius: 20 }}
+                  src={item.images[0]?.url ?? parkSvg}
+                  style={{ borderRadius: 4 }}
                   fit="cover"
                   width={80}
                   height={80}

@@ -36,14 +36,14 @@ axios.interceptors.response.use(
       if (response.status) {
         handStatus(response.status)
       }
-      Toast.show('error code:' + response.data.code + '   ' + response.data.message)
+      Toast.show(response.data.message)
       return Promise.reject(response);
     }
   },
 
   (error) => {
     console.log(error);
-    
+
     if (error.response?.status) {
       handStatus(error.response?.status)
       return Promise.reject(error.response);
@@ -116,11 +116,11 @@ export const _post = ({ url, data }) => {
       })
       .catch((err) => {
         if (err.data) {
-          Toast.show('error code:' + err.data.code + '   ' + err.data.message)
+          Toast.show(err.data.message)
           rej(err.data)
 
         } else {
-          Toast.show('error code:' + err.code + '   ' + err.message)
+          Toast.show(err.message)
           rej(err)
         }
       });

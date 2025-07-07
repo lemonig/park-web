@@ -1,11 +1,3 @@
-/*
- * @Author: Jonny
- * @Date: 2024-08-28 13:22:05
- * @LastEditors: Jonny
- * @LastEditTime: 2025-07-03 14:43:08
- * @FilePath: \park-h5\src\pages\market-detail\index.jsx
- */
-
 import React, { useEffect, useRef, useState } from "react";
 import {
   Swiper,
@@ -21,109 +13,87 @@ import {
   Tag,
   PullToRefresh,
 } from "antd-mobile";
-import { sleep } from "antd-mobile/es/utils/sleep";
-import {
-  useNavigate,
-  useParams,
-  useLocation,
-  useSearchParams,
-} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { List as DList, Statistic } from "@Components";
 import { detailMarket as detailApi } from "@Api/market";
-
-import {
-  UnorderedListOutline,
-  AppstoreOutline,
-  UserOutline,
-} from "antd-mobile-icons";
 import "./index.less";
 
-const pageSize = 20;
-function Home() {
+const tagColorList = ["#7B8597", "#7B8597", "#F1C40F", "#E67E22", "#E53935"];
+
+function MarketDetail() {
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  let navigate = useNavigate();
-  const { id } = useParams();
   const [data, setData] = useState({});
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    featchData();
+    fetchData();
   }, []);
 
-  const featchData = async () => {
-    let params = {};
-    let { success, data } = await detailApi({ id });
-    if (success) {
-      setData(data);
-    }
+  const fetchData = async () => {
+    const { success, data } = await detailApi({ id });
+    if (success) setData(data);
   };
-  const back = () => {
+
+  const onBack = () => {
     navigate("/", { replace: true });
   };
-  const booleanturnToChinese = (val) => {
+
+  const formatBoolean = (val) => {
     if (typeof val !== "boolean") return "--";
-    if (val) return "是";
-    if (!val) return "否";
+    return val ? "是" : "否";
   };
 
-  const getTagColor = ({ alarmLevel }) => {
-    const colorList = ["#7B8597", "#7B8597", "#F1C40F", "#E67E22", "#E53935 "];
-    if (!alarmLevel) return;
-    let index = Number(alarmLevel) / 10 - 1;
-    return colorList[index];
+  const getTagColor = (alarmLevel) => {
+    const index = Number(alarmLevel) / 10 - 1;
+    return tagColorList[index] || "#7B8597";
   };
 
-  const colors = ["#ace0ff", "#bcffbd", "#e4fabd", "#ffcfac"];
-
-  const items = data.images.map((item, index) => {
-    if (data && data.images) {
+  const renderSwiper = () => {
+    return (data?.images || []).map((item, index) => (
       <Swiper.Item key={index}>
-        <div className="s-i-content">{index + 1}</div>
-      </Swiper.Item>;
-    }
-  });
+        <div className="s-i-content">
+          <Image src={item.url} fit="cover" width="100%" height={180} />
+        </div>
+      </Swiper.Item>
+    ));
+  };
 
   return (
     <div className="park-wrap">
-      <NavBar back="返回" onBack={back}>
+      <NavBar back="返回" onBack={onBack}>
         详情
       </NavBar>
 
-      <PullToRefresh
-        onRefresh={async () => {
-          featchData();
-        }}
-      >
+      <PullToRefresh onRefresh={fetchData}>
         <div className="content">
-          <div>
-            <Swiper
-              indicator={() => null}
-              ref={swiperRef}
-              defaultIndex={activeIndex}
-              onIndexChange={(index) => {
-                setActiveIndex(index);
-              }}
-            >
-              {items}
-            </Swiper>
-          </div>
+          <Swiper
+            indicator={() => null}
+            ref={swiperRef}
+            defaultIndex={activeIndex}
+            onIndexChange={setActiveIndex}
+          >
+            {renderSwiper()}
+          </Swiper>
+
           <div className="main">
-            <span className="title-one" style={{ fontSize: "bold" }}>
-              {/* {{data.number}} */}
-            </span>
+            <span className="title-one">{data?.number || "--"}</span>
+
             <div className="tag-wrap">
-              <Tag fill="outline">1幢</Tag>
-              <Tag fill="outline">10幢</Tag>
-              <Tag fill="outline">9幢</Tag>
-              <Tag fill="outline">出售</Tag>
-              <Tag fill="outline">出租</Tag>
+              {["1幢", "10幢", "9幢", "出售", "出租"].map((tag, i) => (
+                <Tag key={i} fill="outline">
+                  {tag}
+                </Tag>
+              ))}
             </div>
+
             <Grid columns={3} gap={8}>
-              <Grid.Item Item span={2}>
+              <Grid.Item span={2}>
                 <Card bordered={false}>
                   <Statistic
                     title="待出租"
-                    value={3000}
+                    value={data?.rentCount || 0}
                     valueStyle={{ color: "#3f8600" }}
                   />
                 </Card>
@@ -132,14 +102,14 @@ function Home() {
                 <Card bordered={false}>
                   <Statistic
                     title="待出售"
-                    value={12000}
+                    value={data?.saleCount || 0}
                     valueStyle={{ color: "#3f8600" }}
                   />
                 </Card>
               </Grid.Item>
             </Grid>
 
-            <div class="details">
+            <div className="details">
               <h2>商品详情</h2>
               <p>
                 新鲜羽衣甘蓝，含有丰富膳食纤维等营养元素，加入苹果与橙子的清甜、融合雪梨、香水柠檬、黄柠檬多种新鲜水果的清新，金奖茉莉初雪回甘让味觉更丰富充盈。100%甜味来自水果，每日500瓶果瓶，瘦度更轻盈。
@@ -155,4 +125,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default MarketDetail;
