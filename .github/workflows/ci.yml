@@ -1,13 +1,19 @@
-name: Build and Push Frontend Docker Image
+name: Build, Push, and Deploy Frontend Docker Image
 
 on:
   push:
     branches:
       - main
 
+env:
+  IMAGE_NAME: sixnut/park-web
+  IMAGE_TAG: ${{ github.sha }} # 使用 commit SHA 作为标签
+
 jobs:
-  build-and-push:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       # 1. 检出代码
@@ -23,13 +29,11 @@ jobs:
 
       # 3. 安装依赖并构建 dist
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Build frontend (skip ESLint)
         run: DISABLE_ESLINT_PLUGIN=true yarn build
-        
-      - name: Check Docker username
-        run: echo "Username:${{ secrets.DOCKER_USERNAME }}"
+
       # 4. 登录 Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
@@ -39,9 +43,32 @@ jobs:
 
       # 5. 构建并推送 Docker 镜像
       - name: Build and push Docker image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: sixnut/park-web:latest
+          tags: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }},${{ env.IMAGE_NAME }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # 6. 部署到服务器
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            set -e
+            docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
+            docker stop ${{ env.IMAGE_NAME }} || true
+            docker rm ${{ env.IMAGE_NAME }} || true
+            docker rmi ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} || true
+            docker pull ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+            docker run -p 8080:80 -d --name ${{ env.IMAGE_NAME }} \
+              --health-cmd "curl --fail http://localhost || exit 1" \
+              --health-interval=10s --health-timeout=5s --health-retries=3 \
+              ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+            sleep 5
+            docker ps -f name=${{ env.IMAGE_NAME }} | grep ${{ env.IMAGE_NAME }} || { echo "Container failed to start"; exit 1; }
