@@ -7,7 +7,7 @@ on:
 
 env:
   IMAGE_NAME: sixnut/park-web
-  IMAGE_TAG: ${{ github.sha }} # 使用 commit SHA 作为标签
+  IMAGE_TAG: ${{ github.sha }}
 
 jobs:
   build-and-deploy:
@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # 5. 构建并推送 Docker 镜像
+      # 5. 构建并推送 Docker 镜像（移除缓存配置）
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
@@ -49,8 +49,6 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }},${{ env.IMAGE_NAME }}:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
       # 6. 部署到服务器
       - name: Deploy to Server
